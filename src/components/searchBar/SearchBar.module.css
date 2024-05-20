@@ -1,0 +1,22 @@
+.searchBarForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 5px;
+  background-color: rgb(100, 108, 223);
+}
+.searchBarInput {
+  font-size: 20px;
+  padding: 4px 8px;
+  border: 2px solid gray;
+  border-radius: 8px;
+}
+.searchBarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border: 2px solid gray;
+}

@@ -1,0 +1,17 @@
+.imageCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.imageCard:hover {
+  scale: 1.04;
+}
+
+.image {
+  border-radius: 4px;
+  width: calc((100%-60px) / 4);
+  width: 320px;
+  height: 320px;
+}
