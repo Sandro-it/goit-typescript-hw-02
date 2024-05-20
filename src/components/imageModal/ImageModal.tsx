@@ -1,9 +1,20 @@
 import Modal from "react-modal";
+import { ImageCardImage } from "../imageCard/ImageCard";
 import css from "./ImageModal.module.css";
+
+interface ImageModalProps {
+  isOpen: boolean;
+  closeModal: () => void;
+  image: ImageCardImage | null;
+}
 
 Modal.setAppElement("#root");
 
-const ImageModal = ({ isOpen, closeModal, image }) => {
+const ImageModal: React.FC<ImageModalProps> = ({
+  isOpen,
+  closeModal,
+  image,
+}) => {
   if (!image) {
     return null;
   }

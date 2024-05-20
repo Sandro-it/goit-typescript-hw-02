@@ -5,20 +5,29 @@ import Loader from "../loader/Loader";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import LoadMoreBtn from "../loadMoreBtn/LoadMoreBtn";
 import ImageModal from "../imageModal/ImageModal";
-import fetchApi from "/src/api/api.js";
+import { ImageCardImage } from "../imageCard/ImageCard";
+import fetchApi from "../../api/api";
+
+interface ImageApiResponse {
+  data: {
+    results: ImageCardImage[];
+  };
+}
 
 const App = () => {
-  const [query, setQuery] = useState("");
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
+  const [query, setQuery] = useState<string>("");
+  const [images, setImages] = useState<ImageCardImage[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState<number>(1);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<ImageCardImage | null>(
+    null
+  );
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const imagesPerPage = 12;
 
-  const handleSearch = (searchQuery) => {
+  const handleSearch = (searchQuery: string) => {
     if (!searchQuery.trim()) {
       return;
     }
@@ -31,7 +40,7 @@ const App = () => {
   const fetchImages = async () => {
     try {
       setLoading(true);
-      const response = await fetchApi(query, page);
+      const response: ImageApiResponse = await fetchApi(query, page);
       const newImages = response.data.results;
       if (newImages.length === 0 || newImages.length < imagesPerPage) {
         setHasMore(false);
@@ -51,7 +60,7 @@ const App = () => {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const openModal = (image) => {
+  const openModal = (image: ImageCardImage) => {
     setSelectedImage(image);
     setIsOpen(true);
   };
@@ -70,7 +79,7 @@ const App = () => {
   return (
     <div className="app">
       <SearchBar onSubmit={handleSearch} />
-      {loading && <Loader />}
+      {loading && <Loader loading={loading} />}
       {error && <ErrorMessage message={error} />}
       {images.length > 0 && (
         <>

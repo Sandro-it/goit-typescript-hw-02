@@ -1,6 +1,20 @@
 import css from "./ImageCard.module.css";
 
-const ImageCard = ({ image, onImageClick }) => {
+export interface ImageCardImage {
+  id: string;
+  urls: {
+    small: string;
+    regular: string;
+  };
+  alt_description: string;
+}
+
+interface ImageCardProps {
+  image: ImageCardImage;
+  onImageClick: (image: ImageCardImage) => void;
+}
+
+const ImageCard: React.FC<ImageCardProps> = ({ image, onImageClick }) => {
   const handleClick = () => {
     onImageClick(image);
   };

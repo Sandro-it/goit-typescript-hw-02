@@ -1,6 +1,11 @@
 import css from "./LoadMoreBtn.module.css";
 
-const LoadMoreBtn = ({ onLoadMore, show }) => {
+interface LoadMoreBtnProps {
+  onLoadMore: () => void;
+  show: boolean;
+}
+
+const LoadMoreBtn: React.FC<LoadMoreBtnProps> = ({ onLoadMore, show }) => {
   if (!show) {
     return null;
   }
